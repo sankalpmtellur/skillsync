@@ -64,7 +64,6 @@ const Projects = () => {
 
   const statuses = ["planning", "in-progress", "completed", "on-hold"];
 
-  // Enhanced dummy data
   const [projects, setProjects] = useState([
     {
       id: 1,
@@ -188,7 +187,6 @@ const Projects = () => {
     }
   ]);
 
-  // Filter and sort logic
   const filteredProjects = projects.filter((project) => {
     const matchesSearch = project.title.toLowerCase().includes(search.toLowerCase()) ||
                           project.description.toLowerCase().includes(search.toLowerCase()) ||
@@ -208,18 +206,15 @@ const Projects = () => {
     return 0;
   });
 
-  // Pagination logic
   const indexOfLastProject = currentPage * itemsPerPage;
   const indexOfFirstProject = indexOfLastProject - itemsPerPage;
   const currentProjects = sortedProjects.slice(indexOfFirstProject, indexOfLastProject);
   const totalPages = Math.ceil(sortedProjects.length / itemsPerPage);
 
-  // Reset to page 1 when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [search, selectedCategory, selectedStatus, sortBy]);
 
-  // Close all dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest('.dropdown-container')) {
@@ -287,7 +282,6 @@ const Projects = () => {
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white text-gray-900 font-inter">
       <Navbar />
 
-      {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 to-purple-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
           <motion.div
@@ -341,7 +335,6 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Filters Section */}
       <section className="py-8 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
@@ -356,7 +349,6 @@ const Projects = () => {
 
             <div className={`${showFilters ? 'block' : 'hidden'} lg:block w-full lg:w-auto`}>
               <div className="flex flex-col lg:flex-row gap-4">
-                {/* Category Filter */}
                 <div className="relative dropdown-container">
                   <button 
                     onClick={() => setShowCategoryDropdown(!showCategoryDropdown)}
@@ -394,7 +386,6 @@ const Projects = () => {
                   </div>
                 </div>
 
-                {/* Status Filter */}
                 <div className="relative dropdown-container">
                   <button 
                     onClick={() => setShowStatusDropdown(!showStatusDropdown)}
@@ -432,7 +423,6 @@ const Projects = () => {
                   </div>
                 </div>
 
-                {/* Sort */}
                 <div className="relative dropdown-container">
                   <button 
                     onClick={() => setShowSortDropdown(!showSortDropdown)}
@@ -491,7 +481,6 @@ const Projects = () => {
                 </div>
               </div>
 
-              {/* Active Filters */}
               {(selectedCategory || selectedStatus) && (
                 <div className="flex flex-wrap gap-2 mt-4">
                   {selectedCategory && (
@@ -528,7 +517,6 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Projects Section */}
       <section className="py-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {sortedProjects.length > 0 ? (
@@ -542,7 +530,6 @@ const Projects = () => {
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 border border-gray-100 overflow-hidden group"
                   >
-                    {/* Project Header */}
                     <div className="p-6 border-b border-gray-100">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-1">
@@ -561,7 +548,6 @@ const Projects = () => {
                         </div>
                       </div>
 
-                      {/* Tags */}
                       <div className="flex flex-wrap gap-1 mb-4">
                         {project.tags.slice(0, 3).map((tag, tagIndex) => (
                           <span
@@ -578,7 +564,6 @@ const Projects = () => {
                         )}
                       </div>
 
-                      {/* Progress */}
                       <div className="mb-4">
                         <div className="flex items-center justify-between text-sm mb-1">
                           <span className="text-gray-600">Progress</span>
@@ -592,7 +577,6 @@ const Projects = () => {
                         </div>
                       </div>
 
-                      {/* Meta Info */}
                       <div className="flex items-center justify-between text-sm text-gray-600">
                         <div className="flex items-center gap-1">
                           <Users className="w-4 h-4" />
@@ -608,7 +592,6 @@ const Projects = () => {
                       </div>
                     </div>
 
-                    {/* Footer */}
                     <div className="p-4 bg-gray-50">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
@@ -651,7 +634,6 @@ const Projects = () => {
                 ))}
               </div>
 
-              {/* Pagination */}
               {totalPages > 1 && (
                 <div className="mt-12 flex justify-center">
                   <div className="flex items-center gap-2">
@@ -733,7 +715,6 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Create Project Modal */}
       {showCreateModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">

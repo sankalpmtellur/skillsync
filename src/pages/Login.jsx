@@ -31,7 +31,6 @@ const Login = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: "" }));
     }
@@ -66,17 +65,14 @@ const Login = () => {
     
     setIsLoading(true);
     
-    // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
-      // Navigate to profile or dashboard after successful login
       navigate("/profile");
     }, 2000);
   };
 
   const handleSocialLogin = (provider) => {
     setIsLoading(true);
-    // Simulate social login
     setTimeout(() => {
       setIsLoading(false);
       navigate("/profile");
@@ -87,11 +83,9 @@ const Login = () => {
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white text-gray-900 font-inter">
       <Navbar />
 
-      {/* Login Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 to-purple-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side - Content */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -105,7 +99,7 @@ const Login = () => {
                   </div>
                 </div>
                 <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-                  <span className="block">Welcome Back to</span>
+                  <span className="block">Welcome to</span>
                   <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                     SkillSync
                   </span>
@@ -148,7 +142,6 @@ const Login = () => {
               </div>
             </motion.div>
 
-            {/* Right Side - Login Form */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -156,18 +149,6 @@ const Login = () => {
               className="max-w-md mx-auto w-full"
             >
               <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
-                {/* Mobile Header */}
-                <div className="lg:hidden text-center mb-8">
-                  <div className="flex justify-center mb-6">
-                    <div className="p-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full">
-                      <Zap className="w-8 h-8 text-white" />
-                    </div>
-                  </div>
-                  <h1 className="text-3xl font-bold mb-2">Welcome Back</h1>
-                  <p className="text-gray-600">Sign in to continue your journey</p>
-                </div>
-
-                {/* Back to Home Link */}
                 <Link 
                   to="/" 
                   className="hidden lg:flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors mb-6"
@@ -176,51 +157,8 @@ const Login = () => {
                   Back to Home
                 </Link>
 
-                <h2 className="text-2xl font-bold mb-6">Sign In</h2>
+                <h2 className="text-2xl font-bold mb-6">Login</h2>
 
-                {/* Social Login Buttons */}
-                <div className="space-y-3 mb-6">
-                  <button
-                    onClick={() => handleSocialLogin("google")}
-                    disabled={isLoading}
-                    className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    <Chrome className="w-5 h-5" />
-                    <span>Continue with Google</span>
-                  </button>
-                  
-                  <div className="flex gap-3">
-                    <button
-                      onClick={() => handleSocialLogin("github")}
-                      disabled={isLoading}
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      <Github className="w-5 h-5" />
-                      <span>GitHub</span>
-                    </button>
-                    
-                    <button
-                      onClick={() => handleSocialLogin("twitter")}
-                      disabled={isLoading}
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      <Twitter className="w-5 h-5" />
-                      <span>Twitter</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Divider */}
-                <div className="relative mb-6">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-300"></div>
-                  </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="px-2 bg-white text-gray-500">Or continue with email</span>
-                  </div>
-                </div>
-
-                {/* Login Form */}
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
@@ -285,7 +223,7 @@ const Login = () => {
                       />
                       <span className="ml-2 text-sm text-gray-600">Remember me</span>
                     </label>
-                    <Link to="/forgot-password" className="text-sm text-blue-600 hover:text-blue-700">
+                    <Link to="#" className="text-sm text-blue-600 hover:text-blue-700">
                       Forgot password?
                     </Link>
                   </div>
@@ -298,23 +236,23 @@ const Login = () => {
                     {isLoading ? (
                       <>
                         <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        Signing in...
+                        Logging in...
                       </>
                     ) : (
                       <>
-                        Sign In
+                        Login
                         <ArrowRight className="w-5 h-5" />
                       </>
                     )}
                   </button>
                 </form>
 
-                {/* Sign Up Link */}
+
                 <div className="mt-6 text-center">
                   <p className="text-gray-600">
                     Don't have an account?{" "}
                     <Link to="/signup" className="text-blue-600 hover:text-blue-700 font-semibold">
-                      Sign up for free
+                      Sign up
                     </Link>
                   </p>
                 </div>
@@ -323,7 +261,6 @@ const Login = () => {
           </div>
         </div>
 
-        {/* Background Decorations */}
         <div className="absolute top-0 right-0 opacity-20">
           <div className="w-64 h-64 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full blur-3xl"></div>
         </div>

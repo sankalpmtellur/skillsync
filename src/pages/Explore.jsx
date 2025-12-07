@@ -34,7 +34,6 @@ const Explore = () => {
   const [showAvailabilityDropdown, setShowAvailabilityDropdown] = useState(false);
   const [showSortDropdown, setShowSortDropdown] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6; // Show 6 users per page
 
   const skills = [
     "Web Development",
@@ -167,7 +166,6 @@ const Explore = () => {
       const levels = { "Expert": 4, "Advanced": 3, "Intermediate": 2, "Beginner": 1 };
       return levels[b.experience] - levels[a.experience];
     }
-    return 0; // relevance
   });
 
   const indexOfLastUser = currentPage * itemsPerPage;
@@ -485,7 +483,6 @@ const Explore = () => {
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 border border-gray-100 overflow-hidden group"
                   >
-                    {/* Profile Header */}
                     <div className="p-6 border-b border-gray-100">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex items-center gap-3">

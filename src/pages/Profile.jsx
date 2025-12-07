@@ -141,7 +141,6 @@ const Profile = () => {
         <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white text-gray-900 font-inter">
             <Navbar />
 
-            {/* Profile Header */}
             <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 to-purple-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                     <motion.div
@@ -150,7 +149,6 @@ const Profile = () => {
                         transition={{ duration: 0.6 }}
                         className="flex flex-col lg:flex-row gap-8 items-start"
                     >
-                        {/* Avatar Section */}
                         <div className="flex-shrink-0">
                             <div className="relative">
                                 <img
@@ -167,7 +165,6 @@ const Profile = () => {
                             </div>
                         </div>
 
-                        {/* Profile Info */}
                         <div className="flex-1">
                             <div className="flex items-start justify-between mb-4">
                                 <div>
@@ -199,7 +196,6 @@ const Profile = () => {
 
                             <p className="text-gray-700 mb-6 max-w-3xl">{profileData.bio}</p>
 
-                            {/* Social Links */}
                             <div className="flex gap-4 mb-6">
                                 {profileData.github && (
                                     <a href={`https://github.com/${profileData.github}`} className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
@@ -227,7 +223,6 @@ const Profile = () => {
                                 )}
                             </div>
 
-                            {/* Stats */}
                             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                                 {stats.map((stat, index) => (
                                     <div key={index} className="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100">
@@ -248,7 +243,6 @@ const Profile = () => {
                 </div>
             </section>
 
-            {/* Tabs Section */}
             <section className="py-8 bg-white border-b border-gray-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex gap-8 border-b border-gray-200">
@@ -268,10 +262,8 @@ const Profile = () => {
                 </div>
             </section>
 
-            {/* Tab Content */}
             <section className="py-12">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    {/* Overview Tab */}
                     {activeTab === "overview" && (
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -280,7 +272,6 @@ const Profile = () => {
                             className="grid lg:grid-cols-3 gap-8"
                         >
                             <div className="lg:col-span-2 space-y-6">
-                                {/* About Section */}
                                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                                     <h2 className="text-xl font-semibold mb-4">About</h2>
                                     <div className="space-y-4">
@@ -307,7 +298,6 @@ const Profile = () => {
                                     </div>
                                 </div>
 
-                                {/* Recent Projects */}
                                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                                     <h2 className="text-xl font-semibold mb-4">Recent Projects</h2>
                                     <div className="space-y-4">
@@ -342,7 +332,6 @@ const Profile = () => {
                             </div>
 
                             <div className="space-y-6">
-                                {/* Skills */}
                                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                                     <h2 className="text-xl font-semibold mb-4">Skills</h2>
                                     <div className="flex flex-wrap gap-2">
@@ -357,7 +346,6 @@ const Profile = () => {
                                     </div>
                                 </div>
 
-                                {/* Languages */}
                                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                                     <h2 className="text-xl font-semibold mb-4">Languages</h2>
                                     <div className="space-y-2">
@@ -370,7 +358,6 @@ const Profile = () => {
                                     </div>
                                 </div>
 
-                                {/* Quick Stats */}
                                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                                     <h2 className="text-xl font-semibold mb-4">Engagement</h2>
                                     <div className="space-y-3">
@@ -401,7 +388,6 @@ const Profile = () => {
                         </motion.div>
                     )}
 
-                    {/* Projects Tab */}
                     {activeTab === "projects" && (
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -447,7 +433,6 @@ const Profile = () => {
                         </motion.div>
                     )}
 
-                    {/* Achievements Tab */}
                     {activeTab === "achievements" && (
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -477,7 +462,6 @@ const Profile = () => {
                         </motion.div>
                     )}
 
-                    {/* Skills Tab */}
                     {activeTab === "skills" && (
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -505,7 +489,6 @@ const Profile = () => {
                 </div>
             </section>
 
-            {/* Edit Profile Modal */}
             {isEditingProfile && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
                     <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
@@ -623,7 +606,6 @@ const Profile = () => {
                 </div>
             )}
 
-            {/* Avatar Selection Modal */}
             {showAvatarModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
                     <div className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
