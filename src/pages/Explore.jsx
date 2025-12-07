@@ -52,7 +52,6 @@ const Explore = () => {
   const experienceLevels = ["Beginner", "Intermediate", "Advanced", "Expert"];
   const availabilityOptions = ["Full-time", "Part-time", "Weekends", "Flexible"];
 
-  // Enhanced dummy data
   const users = [
     {
       id: 1,
@@ -65,7 +64,7 @@ const Explore = () => {
       projects: 12,
       rating: 4.8,
       bio: "Passionate about building scalable web applications with modern technologies.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      avatar: "/src/assets/avatars/avatar1.png",
       verified: true,
       joined: "2023"
     },
@@ -80,7 +79,7 @@ const Explore = () => {
       projects: 8,
       rating: 4.9,
       bio: "Specializing in deep learning and computer vision applications.",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+      avatar: "/src/assets/avatars/avatar2.png",
       verified: true,
       joined: "2022"
     },
@@ -95,7 +94,7 @@ const Explore = () => {
       projects: 6,
       rating: 4.7,
       bio: "Creating beautiful and functional mobile apps for iOS and Android.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+      avatar: "/src/assets/avatars/avatar3.png",
       verified: false,
       joined: "2023"
     },
@@ -110,7 +109,7 @@ const Explore = () => {
       projects: 15,
       rating: 4.9,
       bio: "Designing user-centered experiences that delight and inspire.",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      avatar: "/src/assets/avatars/avatar4.png",
       verified: true,
       joined: "2021"
     },
@@ -125,7 +124,7 @@ const Explore = () => {
       projects: 10,
       rating: 4.6,
       bio: "Building decentralized applications and smart contracts.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      avatar: "/src/assets/avatars/avatar5.png",
       verified: true,
       joined: "2022"
     },
@@ -140,13 +139,12 @@ const Explore = () => {
       projects: 9,
       rating: 4.8,
       bio: "Automating deployment pipelines and managing cloud infrastructure.",
-      image: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=150&h=150&fit=crop&crop=face",
+      avatar: "/src/assets/avatars/avatar6.png",
       verified: false,
       joined: "2023"
     }
   ];
 
-  // Enhanced filter logic
   const filteredUsers = users.filter((user) => {
     const matchesSearch = user.name.toLowerCase().includes(search.toLowerCase()) ||
       user.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -162,7 +160,6 @@ const Explore = () => {
     return matchesSearch && matchesSkills && matchesExperience && matchesAvailability;
   });
 
-  // Sort logic
   const sortedUsers = [...filteredUsers].sort((a, b) => {
     if (sortBy === "rating") return b.rating - a.rating;
     if (sortBy === "projects") return b.projects - a.projects;
@@ -173,13 +170,11 @@ const Explore = () => {
     return 0; // relevance
   });
 
-  // Pagination logic
   const indexOfLastUser = currentPage * itemsPerPage;
   const indexOfFirstUser = indexOfLastUser - itemsPerPage;
   const currentUsers = sortedUsers.slice(indexOfFirstUser, indexOfLastUser);
   const totalPages = Math.ceil(sortedUsers.length / itemsPerPage);
 
-  // Reset to page 1 when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [search, selectedSkills, experienceLevel, availability, sortBy]);
@@ -192,7 +187,6 @@ const Explore = () => {
     );
   };
 
-  // Close all dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest('.dropdown-container')) {
@@ -211,7 +205,6 @@ const Explore = () => {
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white text-gray-900 font-inter">
       <Navbar />
 
-      {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 to-purple-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
           <motion.div
@@ -232,7 +225,6 @@ const Explore = () => {
               Connect with the right people based on skills, experience, and availability.
             </p>
 
-            {/* Search Bar */}
             <div className="max-w-2xl mx-auto">
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -248,17 +240,15 @@ const Explore = () => {
           </motion.div>
         </div>
 
-        {/* Background decoration */}
         <div className="absolute top-0 right-0 opacity-20">
           <div className="w-64 h-64 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full blur-3xl"></div>
         </div>
       </section>
 
-      {/* Filters Section */}
       <section className="py-8 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
-            {/* Filter Toggle Button (Mobile) */}
+
             <button
               onClick={() => setShowFilters(!showFilters)}
               className="lg:hidden flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
@@ -268,10 +258,9 @@ const Explore = () => {
               <ChevronDown className={`w-4 h-4 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
             </button>
 
-            {/* Filters */}
             <div className={`${showFilters ? 'block' : 'hidden'} lg:block w-full lg:w-auto`}>
               <div className="flex flex-col lg:flex-row gap-4">
-                {/* Skills Filter */}
+
                 <div className="relative dropdown-container">
                   <button
                     onClick={() => setShowSkillsDropdown(!showSkillsDropdown)}
@@ -282,7 +271,6 @@ const Explore = () => {
                     <ChevronDown className={`w-4 h-4 ml-auto transition-transform ${showSkillsDropdown ? 'rotate-180' : ''}`} />
                   </button>
 
-                  {/* Skills Dropdown */}
                   <div className={`${showSkillsDropdown ? 'block' : 'hidden'} absolute top-full mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-10`}>
                     <div className="p-4 max-h-64 overflow-y-auto">
                       <div className="flex flex-wrap gap-2">
@@ -294,8 +282,8 @@ const Explore = () => {
                               setShowSkillsDropdown(false);
                             }}
                             className={`px-3 py-1 rounded-full text-sm transition-colors ${selectedSkills.includes(skill)
-                                ? 'bg-blue-600 text-white'
-                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                              ? 'bg-blue-600 text-white'
+                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                               }`}
                           >
                             {skill}
@@ -306,7 +294,6 @@ const Explore = () => {
                   </div>
                 </div>
 
-                {/* Experience Level */}
                 <div className="relative dropdown-container">
                   <button
                     onClick={() => setShowExperienceDropdown(!showExperienceDropdown)}
@@ -317,7 +304,6 @@ const Explore = () => {
                     <ChevronDown className={`w-4 h-4 ml-auto transition-transform ${showExperienceDropdown ? 'rotate-180' : ''}`} />
                   </button>
 
-                  {/* Experience Dropdown */}
                   <div className={`${showExperienceDropdown ? 'block' : 'hidden'} absolute top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10`}>
                     <div className="py-2">
                       <button
@@ -345,7 +331,6 @@ const Explore = () => {
                   </div>
                 </div>
 
-                {/* Availability */}
                 <div className="relative dropdown-container">
                   <button
                     onClick={() => setShowAvailabilityDropdown(!showAvailabilityDropdown)}
@@ -356,7 +341,6 @@ const Explore = () => {
                     <ChevronDown className={`w-4 h-4 ml-auto transition-transform ${showAvailabilityDropdown ? 'rotate-180' : ''}`} />
                   </button>
 
-                  {/* Availability Dropdown */}
                   <div className={`${showAvailabilityDropdown ? 'block' : 'hidden'} absolute top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10`}>
                     <div className="py-2">
                       <button
@@ -384,7 +368,6 @@ const Explore = () => {
                   </div>
                 </div>
 
-                {/* Sort */}
                 <div className="relative dropdown-container">
                   <button
                     onClick={() => setShowSortDropdown(!showSortDropdown)}
@@ -400,7 +383,6 @@ const Explore = () => {
                     <ChevronDown className={`w-4 h-4 ml-auto transition-transform ${showSortDropdown ? 'rotate-180' : ''}`} />
                   </button>
 
-                  {/* Sort Dropdown */}
                   <div className={`${showSortDropdown ? 'block' : 'hidden'} absolute top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10`}>
                     <div className="py-2">
                       <button
@@ -444,7 +426,6 @@ const Explore = () => {
                 </div>
               </div>
 
-              {/* Active Filters */}
               {(selectedSkills.length > 0 || experienceLevel || availability) && (
                 <div className="flex flex-wrap gap-2 mt-4">
                   {selectedSkills.map(skill => (
@@ -479,7 +460,6 @@ const Explore = () => {
               )}
             </div>
 
-            {/* Results Count */}
             <div className="text-gray-600">
               Found <span className="font-semibold text-gray-900">{sortedUsers.length}</span> collaborators
               {sortedUsers.length > itemsPerPage && (
@@ -492,7 +472,6 @@ const Explore = () => {
         </div>
       </section>
 
-      {/* Results Section */}
       <section className="py-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {sortedUsers.length > 0 ? (
@@ -512,7 +491,7 @@ const Explore = () => {
                         <div className="flex items-center gap-3">
                           <div className="relative">
                             <img
-                              src={user.image}
+                              src={user.avatar}
                               alt={user.name}
                               className="w-12 h-12 rounded-full object-cover"
                             />
@@ -532,10 +511,8 @@ const Explore = () => {
                         </button>
                       </div>
 
-                      {/* Bio */}
                       <p className="text-gray-700 text-sm mb-4 line-clamp-2">{user.bio}</p>
 
-                      {/* Skills */}
                       <div className="flex flex-wrap gap-1 mb-4">
                         {user.skills.slice(0, 3).map((skill, skillIndex) => (
                           <span
@@ -552,7 +529,6 @@ const Explore = () => {
                         )}
                       </div>
 
-                      {/* Stats */}
                       <div className="flex items-center gap-4 text-sm text-gray-600">
                         <div className="flex items-center gap-1">
                           <Star className="w-4 h-4 text-yellow-400 fill-current" />
@@ -569,13 +545,12 @@ const Explore = () => {
                       </div>
                     </div>
 
-                    {/* Footer */}
                     <div className="p-4 bg-gray-50">
                       <div className="flex items-center justify-between mb-3">
                         <span className={`px-2 py-1 text-xs rounded-full ${user.experience === 'Expert' ? 'bg-purple-100 text-purple-700' :
-                            user.experience === 'Advanced' ? 'bg-blue-100 text-blue-700' :
-                              user.experience === 'Intermediate' ? 'bg-green-100 text-green-700' :
-                                'bg-gray-100 text-gray-700'
+                          user.experience === 'Advanced' ? 'bg-blue-100 text-blue-700' :
+                            user.experience === 'Intermediate' ? 'bg-green-100 text-green-700' :
+                              'bg-gray-100 text-gray-700'
                           }`}>
                           {user.experience}
                         </span>
@@ -598,26 +573,22 @@ const Explore = () => {
                 ))}
               </div>
 
-              {/* Pagination */}
               {totalPages > 1 && (
                 <div className="mt-12 flex justify-center">
                   <div className="flex items-center gap-2">
-                    {/* Previous Button */}
                     <button
                       onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                       disabled={currentPage === 1}
                       className={`p-2 rounded-lg border transition-colors ${currentPage === 1
-                          ? 'border-gray-200 text-gray-400 cursor-not-allowed'
-                          : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                        ? 'border-gray-200 text-gray-400 cursor-not-allowed'
+                        : 'border-gray-300 text-gray-700 hover:bg-gray-50'
                         }`}
                     >
                       <ChevronLeft className="w-5 h-5" />
                     </button>
 
-                    {/* Page Numbers */}
                     <div className="flex items-center gap-1">
                       {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => {
-                        // Show first page, last page, current page, and pages around current
                         if (
                           page === 1 ||
                           page === totalPages ||
@@ -628,8 +599,8 @@ const Explore = () => {
                               key={page}
                               onClick={() => setCurrentPage(page)}
                               className={`w-10 h-10 rounded-lg font-medium transition-colors ${currentPage === page
-                                  ? 'bg-blue-600 text-white'
-                                  : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
+                                ? 'bg-blue-600 text-white'
+                                : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
                                 }`}
                             >
                               {page}
@@ -649,13 +620,12 @@ const Explore = () => {
                       })}
                     </div>
 
-                    {/* Next Button */}
                     <button
                       onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                       disabled={currentPage === totalPages}
                       className={`p-2 rounded-lg border transition-colors ${currentPage === totalPages
-                          ? 'border-gray-200 text-gray-400 cursor-not-allowed'
-                          : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                        ? 'border-gray-200 text-gray-400 cursor-not-allowed'
+                        : 'border-gray-300 text-gray-700 hover:bg-gray-50'
                         }`}
                     >
                       <ChevronRight className="w-5 h-5" />
