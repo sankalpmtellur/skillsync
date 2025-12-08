@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
-    LayoutDashboard,
     Users,
     Code2,
     User,
@@ -26,12 +25,7 @@ const Sidebar = () => {
     };
 
     const menuItems = [
-        {
-            title: "Dashboard",
-            icon: LayoutDashboard,
-            path: "/dashboard",
-            description: "Overview and stats"
-        },
+        // Dashboard removed
         {
             title: "Connections",
             icon: Users,

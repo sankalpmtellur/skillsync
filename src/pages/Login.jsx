@@ -71,7 +71,7 @@ const handleSubmit = async (e) => {
 
     console.log("Login success:", res.data);
     localStorage.setItem("token", res.data.token);
-    navigate("/dashboard");
+    navigate("/profile");
   } catch (err) {
     console.log("Login error:", err);
     console.log("Login error response:", err.response?.data);

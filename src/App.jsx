@@ -8,7 +8,6 @@ import HowItWorks from "./pages/HowItWorks";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import CompleteProfile from "./pages/CompleteProfile";
-import Dashboard from "./pages/Dashboard";
 
 function App() {
     return (
@@ -24,7 +23,6 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/complete-profile" element={<CompleteProfile />} />
-                <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
         </Router>
     );

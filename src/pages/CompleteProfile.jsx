@@ -157,7 +157,7 @@ const CompleteProfile = () => {
       setShowSuccessMessage(true);
       
       setTimeout(() => {
-        navigate("/dashboard");
+        navigate("/profile");
       }, 2000);
 
     } catch (err) {
@@ -168,7 +168,7 @@ const CompleteProfile = () => {
   };
 
   const handleSkip = () => {
-    navigate("/dashboard");
+    navigate("/profile");
   };
 
   return (
