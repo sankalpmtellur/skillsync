@@ -1,24 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
-  Mail,
-  Lock,
-  Eye,
-  EyeOff,
-  User,
-  Zap,
-  ArrowRight,
-  Github,
-  Twitter,
-  Chrome,
-  Shield,
-  ArrowLeft,
-  CheckCircle,
-  XCircle,
-  Briefcase,
-  MapPin,
-  Calendar
+  Mail, Lock, Eye, EyeOff, User, Zap, ArrowRight, Github, Twitter, Chrome, Shield, ArrowLeft, CheckCircle, XCircle, Briefcase, MapPin, Calendar
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -160,10 +145,30 @@ const Signup = () => {
 
     setIsLoading(true);
 
-    setTimeout(() => {
+    try {
+      const res = await axios.post("http://localhost:3000/api/auth/signup", {
+        name: formData.firstName + " " + formData.lastName,
+        email: formData.email,
+        password: formData.password,
+        skills: formData.experience + ", " + formData.location
+      });
+
       setIsLoading(false);
+      console.log(res.data);
       navigate("/complete-profile");
-    }, 2000);
+    }
+    catch (err) {
+      setIsLoading(false);
+      console.error("Signup error full:", err);
+      if (err.response && err.response.data) {
+        console.error("Backend message:", err.response.data);
+        setErrors({ submit: err.response.data.msg || "Server error" });
+      } else {
+        console.error("Unknown error:", err);
+        setErrors({ submit: "Server error" });
+      }
+    }
+
   };
 
   const handleSocialSignup = (provider) => {

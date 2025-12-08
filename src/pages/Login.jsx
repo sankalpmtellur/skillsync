@@ -1,19 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
-  Mail,
-  Lock,
-  Eye,
-  EyeOff,
-  User,
-  Zap,
-  ArrowRight,
-  Github,
-  Twitter,
-  Chrome,
-  Shield,
-  ArrowLeft
+  Mail, Lock, Eye, EyeOff, User, Zap, ArrowRight, Github, Twitter, Chrome, Shield, ArrowLeft
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -42,37 +32,49 @@ const Login = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!formData.email) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Email is invalid";
     }
-    
+
     if (!formData.password) {
       newErrors.password = "Password is required";
     } else if (formData.password.length < 6) {
       newErrors.password = "Password must be at least 6 characters";
     }
-    
+
     return newErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = validateForm();
-    
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-    
+
     setIsLoading(true);
-    
-    setTimeout(() => {
+
+    try {
+      const res = await axios.post("http://localhost:3000/api/auth/login", {
+        email: formData.email,
+        password: formData.password,
+      });
+
       setIsLoading(false);
+      localStorage.setItem("token", res.data.token);
       navigate("/profile");
-    }, 2000);
+
+      console.log(res.data);
+    } catch (err) {
+      setIsLoading(false);
+      console.error(err);
+      setErrors({ submit: err.response?.data?.msg || "Server error" });
+    }
   };
 
   const handleSocialLogin = (provider) => {
@@ -111,7 +113,7 @@ const Login = () => {
                 <p className="text-xl text-gray-600 mb-8">
                   Continue your journey of building amazing projects with talented collaborators from around the world.
                 </p>
-                
+
                 <div className="space-y-6">
                   <div className="flex items-center gap-4">
                     <div className="p-3 bg-blue-100 rounded-full">
@@ -122,7 +124,7 @@ const Login = () => {
                       <p className="text-sm text-gray-600">Your data is protected with industry-standard encryption</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center gap-4">
                     <div className="p-3 bg-purple-100 rounded-full">
                       <User className="w-6 h-6 text-purple-600" />
@@ -132,7 +134,7 @@ const Login = () => {
                       <p className="text-sm text-gray-600">Get matched with projects that fit your skills perfectly</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center gap-4">
                     <div className="p-3 bg-green-100 rounded-full">
                       <Zap className="w-6 h-6 text-green-600" />
@@ -153,8 +155,8 @@ const Login = () => {
               className="max-w-md mx-auto w-full"
             >
               <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
-                <Link 
-                  to="/" 
+                <Link
+                  to="/"
                   className="hidden lg:flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors mb-6"
                 >
                   <ArrowLeft className="w-4 h-4" />
@@ -176,9 +178,8 @@ const Login = () => {
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                          errors.email ? "border-red-500" : "border-gray-300"
-                        }`}
+                        className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.email ? "border-red-500" : "border-gray-300"
+                          }`}
                         placeholder="Enter your email"
                         disabled={isLoading}
                       />
@@ -200,9 +201,8 @@ const Login = () => {
                         type={showPassword ? "text" : "password"}
                         value={formData.password}
                         onChange={handleChange}
-                        className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                          errors.password ? "border-red-500" : "border-gray-300"
-                        }`}
+                        className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.password ? "border-red-500" : "border-gray-300"
+                          }`}
                         placeholder="Enter your password"
                         disabled={isLoading}
                       />
