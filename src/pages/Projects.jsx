@@ -4,6 +4,7 @@ import axios from "axios";
 import { Search, Filter, Plus, Code2, Trophy, Rocket, Star, Calendar, Users, ExternalLink, Edit, Trash2, ChevronDown, Clock, TrendingUp, X } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { API_ENDPOINTS } from "../config/api";
 
 const Projects = () => {
   const [search, setSearch] = useState("");
@@ -56,7 +57,7 @@ const Projects = () => {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await axios.get("http://localhost:3000/api/projects", {
+        const res = await axios.get(API_ENDPOINTS.PROJECTS.GET_ALL, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -122,7 +123,7 @@ const Projects = () => {
       const token = localStorage.getItem("token");
 
       const res = await axios.post(
-        "http://localhost:3000/api/projects",
+        API_ENDPOINTS.PROJECTS.CREATE,
         {
           title: newProject.title,
           description: newProject.description,
@@ -168,7 +169,7 @@ const Projects = () => {
     try {
       const token = localStorage.getItem("token");
 
-      await axios.delete(`http://localhost:3000/api/projects/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/projects/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProjects((prev) => prev.filter((p) => p.id !== id));
@@ -196,7 +197,7 @@ const Projects = () => {
       const token = localStorage.getItem("token");
 
       const res = await axios.put(
-        `http://localhost:3000/api/projects/${editProject.id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/projects/${editProject.id}`,
         {
           title: editProject.title,
           description: editProject.description,
@@ -228,7 +229,7 @@ const Projects = () => {
         const fetchProjects = async () => {
           try {
             const token = localStorage.getItem("token");
-            const res = await axios.get("http://localhost:3000/api/projects", {
+            const res = await axios.get(API_ENDPOINTS.PROJECTS.GET_ALL, {
               headers: { Authorization: `Bearer ${token}` },
             });
             setProjects(res.data);

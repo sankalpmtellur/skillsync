@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
+import { API_ENDPOINTS } from "../config/api";
 
 const Profile = () => {
     const [user, setUser] = useState(null);
@@ -21,7 +22,7 @@ const Profile = () => {
                     return;
                 }
 
-                const res = await axios.get("http://localhost:3000/api/auth/me", {
+                const res = await axios.get(API_ENDPOINTS.AUTH.ME, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

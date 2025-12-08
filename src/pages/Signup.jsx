@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { API_ENDPOINTS } from "../config/api";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -148,7 +149,7 @@ const Signup = () => {
     try {
       const fullName = `${formData.firstName} ${formData.lastName}`;
 
-      const res = await axios.post("http://localhost:3000/api/auth/signup", {
+      const res = await axios.post(API_ENDPOINTS.AUTH.SIGNUP, {
         name: fullName,
         email: formData.email,
         password: formData.password,

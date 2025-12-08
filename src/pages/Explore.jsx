@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { API_ENDPOINTS } from "../config/api";
 
 const Explore = () => {
   const [search, setSearch] = useState("");
@@ -40,7 +41,7 @@ const Explore = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/users");
+        const res = await axios.get(API_ENDPOINTS.USERS.GET_ALL);
         setUsers(res.data);
         console.log("Fetched users:", res.data);
       } catch (err) {

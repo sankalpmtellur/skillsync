@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { API_ENDPOINTS } from "../config/api";
 
 const CompleteProfile = () => {
   const navigate = useNavigate();
@@ -146,7 +147,7 @@ const CompleteProfile = () => {
         bio: formData.bio || `Passionate developer with expertise in ${selectedSkills.join(', ')}.`
       };
 
-      const res = await axios.put("http://localhost:3000/api/auth/profile", profileData, {
+      const res = await axios.put(API_ENDPOINTS.AUTH.PROFILE, profileData, {
         headers: {
           Authorization: `Bearer ${token}`
         }

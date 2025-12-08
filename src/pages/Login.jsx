@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { API_ENDPOINTS } from "../config/api";
 
 const Login = () => {
   useEffect(() => {
@@ -64,7 +65,7 @@ const handleSubmit = async (e) => {
   setLoginError("");
 
   try {
-    const res = await axios.post("http://localhost:3000/api/auth/login", {
+    const res = await axios.post(API_ENDPOINTS.AUTH.LOGIN, {
       email: formData.email,
       password: formData.password
     });
