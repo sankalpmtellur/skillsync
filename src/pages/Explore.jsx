@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import {
   Search,
   Filter,
@@ -32,6 +34,22 @@ const Explore = () => {
   const [showAvailabilityDropdown, setShowAvailabilityDropdown] = useState(false);
   const [showSortDropdown, setShowSortDropdown] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const res = await axios.get("http://localhost:3000/api/users");
+        setUsers(res.data);
+        console.log("Fetched users:", res.data);
+      } catch (err) {
+        console.error("Error fetching users:", err);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   const skills = [
     "Web Development",
@@ -48,99 +66,6 @@ const Explore = () => {
 
   const experienceLevels = ["Beginner", "Intermediate", "Advanced", "Expert"];
   const availabilityOptions = ["Full-time", "Part-time", "Weekends", "Flexible"];
-
-  const users = [
-    {
-      id: 1,
-      name: "Aarav Sharma",
-      title: "Full Stack Developer",
-      skills: ["Web Development", "React", "Node.js"],
-      experience: "Advanced",
-      location: "San Francisco, CA",
-      availability: "Full-time",
-      projects: 12,
-      rating: 4.8,
-      bio: "Passionate about building scalable web applications with modern technologies.",
-      avatar: "/src/assets/avatars/avatar1.png",
-      verified: true,
-      joined: "2023"
-    },
-    {
-      id: 2,
-      name: "Meera Patel",
-      title: "Machine Learning Engineer",
-      skills: ["AI/ML", "Python", "TensorFlow"],
-      experience: "Expert",
-      location: "New York, NY",
-      availability: "Part-time",
-      projects: 8,
-      rating: 4.9,
-      bio: "Specializing in deep learning and computer vision applications.",
-      avatar: "/src/assets/avatars/avatar2.png",
-      verified: true,
-      joined: "2022"
-    },
-    {
-      id: 3,
-      name: "Sankalp Reddy",
-      title: "Mobile App Developer",
-      skills: ["Mobile Development", "Flutter", "React Native"],
-      experience: "Intermediate",
-      location: "Austin, TX",
-      availability: "Flexible",
-      projects: 6,
-      rating: 4.7,
-      bio: "Creating beautiful and functional mobile apps for iOS and Android.",
-      avatar: "/src/assets/avatars/avatar3.png",
-      verified: false,
-      joined: "2023"
-    },
-    {
-      id: 4,
-      name: "Riya Gupta",
-      title: "UI/UX Designer",
-      skills: ["UI/UX Design", "Figma", "Adobe XD"],
-      experience: "Advanced",
-      location: "Seattle, WA",
-      availability: "Weekends",
-      projects: 15,
-      rating: 4.9,
-      bio: "Designing user-centered experiences that delight and inspire.",
-      avatar: "/src/assets/avatars/avatar4.png",
-      verified: true,
-      joined: "2021"
-    },
-    {
-      id: 5,
-      name: "Alex Chen",
-      title: "Blockchain Developer",
-      skills: ["Blockchain", "Solidity", "Web3"],
-      experience: "Expert",
-      location: "Miami, FL",
-      availability: "Full-time",
-      projects: 10,
-      rating: 4.6,
-      bio: "Building decentralized applications and smart contracts.",
-      avatar: "/src/assets/avatars/avatar5.png",
-      verified: true,
-      joined: "2022"
-    },
-    {
-      id: 6,
-      name: "Jordan Kim",
-      title: "DevOps Engineer",
-      skills: ["DevOps", "Docker", "Kubernetes"],
-      experience: "Advanced",
-      location: "Denver, CO",
-      availability: "Flexible",
-      projects: 9,
-      rating: 4.8,
-      bio: "Automating deployment pipelines and managing cloud infrastructure.",
-      avatar: "/src/assets/avatars/avatar6.png",
-      verified: false,
-      joined: "2023"
-    }
-  ];
 
   const filteredUsers = users.filter((user) => {
     const matchesSearch = user.name.toLowerCase().includes(search.toLowerCase()) ||
