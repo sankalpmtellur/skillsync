@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Zap } from "lucide-react";
+import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,7 +14,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <div className="flex items-center space-x-2">
               <img 
-                src="/src/assets/logo.png" 
+                src={logo} 
                 alt="SkillSync" 
                 className="w-8 h-8 rounded-lg"
               />
